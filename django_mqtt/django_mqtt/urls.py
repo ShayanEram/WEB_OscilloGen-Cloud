@@ -17,11 +17,12 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
-
-from . import views
+from telemetry import views as telemetry_views
+from . import views as project_views
 
 urlpatterns = [
     #path("admin/", admin.site.urls),
-    path("", views.index, name="index"),
-    path("publish", views.publish_message, name="publish"),
+    path("", project_views.index, name="index"),
+    path("publish", project_views.publish_message, name="publish"),
+    path('telemetry/', telemetry_views.list_telemetry, name='telemetry'),
 ]

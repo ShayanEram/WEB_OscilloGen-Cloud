@@ -1,5 +1,6 @@
 import paho.mqtt.client as mqtt
 from django.conf import settings
+from telemetry.models import Telemetry
 
 def on_connect(client, userdata, flags, rc):
     if rc == 0:
@@ -9,7 +10,9 @@ def on_connect(client, userdata, flags, rc):
         print("Bad connection. Code:", rc)
 
 def on_message(client, userdata, msg):
-    print(f"Received message on {msg.topic}: {msg.payload}")
+    payload = msg.payload.decode()
+    print(f"Received on {msg.topic}: {payload}")
+    Telemetry.objects.create(topic=msg.topic, payload=payload)
 
 client = mqtt.Client()
 client.on_connect = on_connect
