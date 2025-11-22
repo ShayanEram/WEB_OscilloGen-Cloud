@@ -20,9 +20,19 @@ from django.urls import path
 from telemetry import views as telemetry_views
 from . import views as project_views
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     #path("admin/", admin.site.urls),
     path("", project_views.index, name="index"),
     path("publish", project_views.publish_message, name="publish"),
     path('telemetry/', telemetry_views.list_telemetry, name='telemetry'),
+    path('functiongen/', telemetry_views.functiongen_control, name='functiongen'),
+    path("oscilloscope/", telemetry_views.oscilloscope_view, name="oscilloscope"),
+    path("firmware/", telemetry_views.firmware_update_view, name="firmware"),
+    path("about/", telemetry_views.about_view, name="about"),
+
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

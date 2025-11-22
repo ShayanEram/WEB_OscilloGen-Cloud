@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}OscilloGen{% endblock %}</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f0f2f5;
+        }
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+        .sidebar {
+            width: 220px;
+            background-color: #3f51b5;
+            color: white;
+            padding: 1em;
+        }
+        .sidebar h2 {
+            margin-top: 0;
+            font-size: 1.4em;
+        }
+        .sidebar a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            margin: 1em 0;
+            padding: 0.5em;
+            border-radius: 4px;
+        }
+        .sidebar a:hover {
+            background-color: #5c6bc0;
+        }
+        .content {
+            flex-grow: 1;
+            padding: 2em;
+        }
+        button, input[type="submit"] {
+            background-color: #3f51b5;
+            color: white;
+            border: none;
+            padding: 0.6em 1.2em;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover, input[type="submit"]:hover {
+            background-color: #5c6bc0;
+        }
+        input, select {
+            padding: 0.5em;
+            margin-top: 0.5em;
+            margin-bottom: 1em;
+            width: 250px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        label {
+            display: block;
+            margin-top: 1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>OscilloGen</h2>
+            <a href="/functiongen/">Function Generator</a>
+            <a href="/oscilloscope/">Oscilloscope</a>
+            <a href="/firmware/">Update</a>
+            <a href="/about/">About</a>
+        </div>
+        <div class="content">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+</body>
+</html>

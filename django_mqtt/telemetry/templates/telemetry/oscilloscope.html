@@ -1,0 +1,40 @@
+{% extends "telemetry/base.html" %}
+{% block title %}Oscilloscope{% endblock %}
+{% block content %}
+<h2>Oscilloscope View</h2>
+
+<form method="post" style="margin-bottom: 1.5em;">
+    {% csrf_token %}
+    <button name="action" value="start">Start</button>
+    <button name="action" value="stop">Stop</button>
+    <button name="action" value="fft">FFT</button>
+    <button name="action" value="filter">Filter</button>
+</form>
+
+<canvas id="waveformChart" width="800" height="400"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('waveformChart').getContext('2d');
+    const chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: {{ timestamps|safe }},
+            datasets: [{
+                label: 'Signal',
+                data: {{ values|safe }},
+                borderColor: 'blue',
+                borderWidth: 1,
+                pointRadius: 0,
+                fill: false
+            }]
+        },
+        options: {
+            scales: {
+                x: { display: false },
+                y: { min: -10, max: 10 }
+            }
+        }
+    });
+</script>
+{% endblock %}

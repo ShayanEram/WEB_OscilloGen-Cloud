@@ -1,0 +1,27 @@
+{% extends "telemetry/base.html" %}
+{% block title %}Function Generator{% endblock %}
+{% block content %}
+    <h2>Function Generator Control</h2>
+    <form method="post">
+        {% csrf_token %}
+        <label>Signal Type:</label>
+        <select name="waveform">
+            <option value="sine">Sine</option>
+            <option value="square">Square</option>
+            <option value="triangle">Triangle</option>
+            <option value="saw">Saw</option>
+            <option value="noise">Noise</option>
+        </select>
+
+        <label>Frequency (Hz):</label>
+        <input type="number" name="frequency" step="0.1" required>
+
+        <label>Amplitude (V):</label>
+        <input type="number" name="amplitude" step="0.1" required>
+
+        <label>Offset (V):</label>
+        <input type="number" name="offset" step="0.1" required>
+
+        <button type="submit">Generate</button>
+    </form>
+{% endblock %}
